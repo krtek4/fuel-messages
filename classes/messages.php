@@ -79,6 +79,11 @@ class Messages {
 		$this->groups = \Config::get('messages.groups');
 	}
 
+	private function check_group($group) {
+		if(!in_array($group, $this->groups))
+				throw new \OutOfRangeException('Unknown group : '.$group);
+	}
+
 	/**
 	 * Add a new message to the session.
 	 * The current object is returned to allow method chaining.
@@ -87,6 +92,8 @@ class Messages {
 	 * @return Messages the instance
 	 */
 	public function message($group, $message) {
+		$this->check_group($group);
+
 		$name = $this->session_name.$group;
 		$messages = \Session::get($name, array());
 		$messages[] = $message;
@@ -105,7 +112,10 @@ class Messages {
 		if(is_null($group))
 			foreach($this->groups as $g)
 				$this->clear($g);
-		else \Session::delete($this->session_name.$group);
+		else {
+			$this->check_group($group);
+			\Session::delete($this->session_name.$group);
+		}
 		return $this;
 	}
 
@@ -124,6 +134,7 @@ class Messages {
 			foreach($this->groups as $g)
 				$messages[$g] = $this->get($g);
 		} else {
+			$this->check_group($group);
 			$name = $this->session_name.$group;
 			$messages = \Session::get($name, array());
 		}

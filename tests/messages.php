@@ -215,11 +215,47 @@ class Tests_Messages extends \Fuel\Core\TestCase {
 	public function test_show() {
 		$data = 'Test message';
 
-		$m = Messages::instance('test12');
+		$m = Messages::instance('test13');
 		$this->assertEquals(strlen($m->show()), 0);
 		$m->message('success', $data);
 		$this->assertNotEquals(strlen($m->show()), 0);
 		$m->message('success', $data);
 		$this->assertNotEquals(strlen($m->show('success')), 0);
+	}
+
+	/**
+	 * @test
+	 * @expectedException OutOfRangeException
+	 */
+	public function test_wrong_group_message() {
+		$m = Messages::instance('test13');
+		$m->message('toto', '');
+	}
+
+	/**
+	 * @test
+	 * @expectedException OutOfRangeException
+	 */
+	public function test_wrong_group_get() {
+		$m = Messages::instance('test13');
+		$m->get('toto', '');
+	}
+
+	/**
+	 * @test
+	 * @expectedException OutOfRangeException
+	 */
+	public function test_wrong_group_show() {
+		$m = Messages::instance('test13');
+		$m->show('toto', '');
+	}
+
+	/**
+	 * @test
+	 * @expectedException OutOfRangeException
+	 */
+	public function test_wrong_group_clear() {
+		$m = Messages::instance('test13');
+		$m->clear('toto', '');
 	}
 }
