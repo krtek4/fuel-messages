@@ -75,7 +75,7 @@ class Messages {
 	 * @param string $name Name of this particular instance
 	 */
 	private function __construct($name) {
-		$this->session_name = \Config::get('messages.session').'.'.$name;
+		$this->session_name = \Config::get('messages.session').'.'.$name.'.';
 		$this->groups = \Config::get('messages.groups');
 	}
 
