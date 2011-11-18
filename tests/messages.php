@@ -1,22 +1,10 @@
 <?php
-/**
- * Part of the Fuel framework.
- *
- * @package    Fuel
- * @version    1.0
- * @author     Fuel Development Team
- * @license    MIT License
- * @copyright  2010 - 2011 Fuel Development Team
- * @link       http://fuelphp.com
- */
 
 namespace Messages;
 
 /**
- * Arr class tests
- *
- * @group Core
- * @group Arr
+ * Messages class tests
+ * @group Messages
  */
 class Tests_Messages extends \Fuel\Core\TestCase {
 	/**
